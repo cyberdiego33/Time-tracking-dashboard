@@ -3,23 +3,19 @@
 const container = document.querySelector("#container");
 let dataJson;
 
-const FetchData = async function () {
-  const getData = await fetch("data.json");
-  console.log(getData);
+const insertHtml = function (data, format = "weekly") {
+  data.forEach((element) => {
+    console.log(element);
 
-  const changed = getData.json();
-  changed
-    .then((res) => {
-      dataJson = res;
-      return dataJson;
-    })
-    .then((data) => {
-      data.forEach((element) => {
+    let mode;
 
-        console.log(element);
+    if (format === "weekly") mode = "Last Week";
+    else {
+      mode = format === "monthly" ? "Last Month" : "Daily";
+    }
 
-        const StringDiv = `
-      <div class="relative bg-[#f1c65b] rounded-2xl overflow-y-hidden">
+    const StringDiv = `
+      <div class="card-item relative bg-[#f1c65b] rounded-2xl overflow-y-hidden">
         <div class="relative h-8 overflow-hidden">
           <img
             class="size-12 right-2 block absolute -top-1"
@@ -39,15 +35,46 @@ const FetchData = async function () {
           <div
             class="flex-1 flex justify-between items-center md:flex-col md:items-start text-white"
           >
-            <p class="text-xl">${element.timeframes["weekly"].current}hrs</p>
-            <span class="text-sm">Last Week - ${element.timeframes["weekly"].previous}hrs</span>
+            <p class="text-xl">${element.timeframes[format].current}hrs</p>
+            <span class="text-sm">${mode} - ${element.timeframes[format].previous}hrs</span>
           </div>
         </div>
       </div>
 `;
-        container.insertAdjacentHTML("beforeend", StringDiv)
-        
-      });
+    container.insertAdjacentHTML("beforeend", StringDiv);
+  });
+};
+
+const filterHtml = function () {
+  const AllCards = document.querySelectorAll(".card-item")
+
+  AllCards.forEach(card => {
+    card.remove()
+  })
+}
+
+const FetchData = async function () {
+  const getData = await fetch("data.json");
+  console.log(getData);
+
+  const changed = getData.json();
+  changed
+    .then((res) => {
+      dataJson = res;
+      return dataJson;
+    })
+    .then((data) => {
+      insertHtml(data, "weekly");
+
+      document
+        .querySelector("#sorting")
+        .addEventListener("click", function (e) {
+          if (!e.target.closest("p")) return;
+
+          const format = `${e.target.textContent}`.toLocaleLowerCase();
+          filterHtml()
+          insertHtml(data, format);
+        });
     });
 };
 
