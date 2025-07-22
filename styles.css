@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-    --Purple600: hsl(246, 80%, 60%)
-    --Orange300(work): hsl(15, 100%, 70%)
-    --Blue300(play): hsl(195, 74%, 62%)
-    --Pink400(study): hsl(348, 100%, 68%)
-    --Green400(exercise): hsl(145, 58%, 55%)
-    --Purple700(social): hsl(264, 64%, 52%)
-    --Yellow300(self care): hsl(43, 84%, 65%)
+    --Purple600: #5847eb;
+    --Orange300-work: #ff8c66;
+    --Blue300-play: #56c2e6;
+    --Pink400-study: #ff5c7c;
+    --Green400-exercise: #4acf81;
+    --Purple700-social: #7536d3;
+    --Yellow300-selfcare: #f1c65b;
 
     /* ### Neutral */
 
     --Navy950: #0f1424ff;
-    --Navy900: hsl(235, 46%, 20%)
-    --Purple500: hsl(235, 45%, 61%)
-    --Navy200: hsl(236, 100%, 87%)
+    --Navy900: #1c1f4a;
+    --Purple500: #6f76c8;
+    --Navy200: #bdc1ff;
 }
 
 
