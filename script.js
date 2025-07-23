@@ -1,7 +1,6 @@
 `use strict`;
 
 const container = document.querySelector("#container");
-let dataJson;
 
 const insertHtml = function (data, format = "weekly") {
   data.forEach((element) => {
@@ -35,7 +34,7 @@ const insertHtml = function (data, format = "weekly") {
           <div
             class="mt-4 flex-1 flex justify-between items-center md:flex-col md:items-start text-white"
           >
-            <p class="text-xl font-light md:mb-3 md:text-3xl">${element.timeframes[format].current}hrs</p>
+            <p class="text-xl font-light md:mb-3 md:text-3xl lg:text-5xl">${element.timeframes[format].current}hrs</p>
             <span class="text-sm font-light text-gray-400">${mode} - ${element.timeframes[format].previous}hrs</span>
           </div>
         </div>
