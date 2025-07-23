@@ -15,7 +15,7 @@ const insertHtml = function (data, format = "weekly") {
     }
 
     const StringDiv = `
-      <div class="card-item relative bg-[#f1c65b] rounded-2xl overflow-y-hidden">
+      <div class="card-item relative rounded-2xl overflow-y-hidden" style="background:${element.bgColor}">
         <div class="relative h-8 overflow-hidden">
           <img
             class="size-12 right-2 block absolute -top-1"
@@ -23,9 +23,9 @@ const insertHtml = function (data, format = "weekly") {
             alt=""
           />
         </div>
-        <div class="p-4 bg-[#1c1f4a] rounded-2xl">
+        <div class="p-4 bg-[#1c1f4a] rounded-2xl ">
           <div class="flex justify-between items-center">
-            <p class="font-semibold text-white">${element.title}</p>
+            <p class="text-white">${element.title}</p>
             <img
               class="h-1 cursor-pointer"
               src="images/icon-ellipsis.svg"
@@ -33,10 +33,10 @@ const insertHtml = function (data, format = "weekly") {
             />
           </div>
           <div
-            class="flex-1 flex justify-between items-center md:flex-col md:items-start text-white"
+            class="mt-4 flex-1 flex justify-between items-center md:flex-col md:items-start text-white"
           >
-            <p class="text-xl">${element.timeframes[format].current}hrs</p>
-            <span class="text-sm">${mode} - ${element.timeframes[format].previous}hrs</span>
+            <p class="text-xl font-light md:mb-3 md:text-3xl">${element.timeframes[format].current}hrs</p>
+            <span class="text-sm font-light text-gray-400">${mode} - ${element.timeframes[format].previous}hrs</span>
           </div>
         </div>
       </div>
