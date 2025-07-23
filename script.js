@@ -5,7 +5,7 @@ let dataJson;
 
 const insertHtml = function (data, format = "weekly") {
   data.forEach((element) => {
-    console.log(element);
+    // console.log(element);
 
     let mode;
 
@@ -46,36 +46,35 @@ const insertHtml = function (data, format = "weekly") {
 };
 
 const filterHtml = function () {
-  const AllCards = document.querySelectorAll(".card-item")
+  const AllCards = document.querySelectorAll(".card-item");
 
-  AllCards.forEach(card => {
-    card.remove()
-  })
-}
+  AllCards.forEach((card) => {
+    card.remove();
+  });
+};
 
 const FetchData = async function () {
   const getData = await fetch("data.json");
-  console.log(getData);
+  // console.log(getData);
 
-  const changed = getData.json();
-  changed
-    .then((res) => {
-      dataJson = res;
-      return dataJson;
+  const data = await getData.json();
+
+  insertHtml(data, "weekly");
+
+  document.querySelector("#sorting").addEventListener("click", function (e) {
+    if (!e.target.closest("p")) return;
+
+    const arrayDates = document.querySelectorAll(".date")
+
+    arrayDates.forEach(div => {
+      if (div === e.target) div.classList.add("text-white")
+      else {div.classList.remove("text-white")}
     })
-    .then((data) => {
-      insertHtml(data, "weekly");
 
-      document
-        .querySelector("#sorting")
-        .addEventListener("click", function (e) {
-          if (!e.target.closest("p")) return;
-
-          const format = `${e.target.textContent}`.toLocaleLowerCase();
-          filterHtml()
-          insertHtml(data, format);
-        });
-    });
+    const format = `${e.target.textContent}`.toLocaleLowerCase();
+    filterHtml();
+    insertHtml(data, format);
+  });
 };
 
 FetchData();
